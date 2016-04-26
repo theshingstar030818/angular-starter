@@ -77,6 +77,8 @@
     "@angular2-material/radio": "2.0.0-alpha.3",
     "@angular2-material/sidenav": "2.0.0-alpha.3",
     "@angular2-material/toolbar": "2.0.0-alpha.3",
+    "primeng": "^1.0.0-beta.3",
+    "primeui": "^4.1.8",
     "angular2": "2.0.0-beta.16",
     "core-js": "^2.2.2",
     "normalize.css": "^4.1.1",

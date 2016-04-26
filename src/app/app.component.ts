@@ -2,11 +2,14 @@
  * Angular 2 decorators and services
  */
 import {Component, ViewEncapsulation} from 'angular2/core';
+import {Http} from 'angular2/http';
 import {RouteConfig, Router} from 'angular2/router';
 
 import {Home} from './home';
 import {AppState} from './app.service';
 import {RouterActive} from './router-active';
+
+import {Accordion, AccordionTab, Tree, SplitButton} from 'primeng/primeng';
 
 /*
  * App Component
@@ -16,7 +19,13 @@ import {RouterActive} from './router-active';
   selector: 'app',
   pipes: [ ],
   providers: [ ],
-  directives: [ RouterActive ],
+  directives: [
+    RouterActive,
+    Accordion,
+    AccordionTab,
+    SplitButton,
+    Tree
+  ],
   encapsulation: ViewEncapsulation.None,
   styles: [
     require('normalize.css'),
@@ -36,40 +45,20 @@ import {RouterActive} from './router-active';
     }
   `],
   template: `
-    <header>
-      <md-toolbar color="primary">
-        <span>{{ name }}</span>
-        <nav>
-          <ul>
-            <li router-active>
-              <a [routerLink]=" ['Index'] ">Index</a>
-            </li>
-            |
-            <li router-active>
-              <a [routerLink]=" ['Home'] ">Home</a>
-            </li>
-            |
-            <li router-active>
-              <a [routerLink]=" ['About'] ">About</a>
-            </li>
-          </ul>
-        </nav>
-      </md-toolbar>
-    </header>
-    <md-progress-bar mode="indeterminate" color="primary" *ngIf="loading"></md-progress-bar>
+    <p-accordion>
+      <p-accordionTab header="Header 1">
+         Content 1
+      </p-accordionTab>
+      <p-accordionTab header="Header 2">
+          Content 2
+      </p-accordionTab>
+      <p-accordionTab header="Header 3">
+          Content 3
+      </p-accordionTab>
+    </p-accordion>
 
-    <main>
-      <router-outlet></router-outlet>
-    </main>
+    <p-tree [value]="files"></p-tree>
 
-    <pre>this.appState.state = {{ appState.state | json }}</pre>
-
-    <footer>
-      WebPack Angular 2 Starter by <a [href]="url">@AngularClass</a>
-      <div>
-        <img [src]="angularclassLogo" width="10%">
-      </div>
-    </footer>
   `
 })
 @RouteConfig([
@@ -83,8 +72,10 @@ export class App {
   loading = false;
   name = 'Angular 2 Webpack Starter';
   url = 'https://twitter.com/AngularClass';
+  files: Array<any>;
 
   constructor(
+    public http: Http,
     public appState: AppState,
     public router: Router) {
 
@@ -92,6 +83,10 @@ export class App {
 
   ngOnInit() {
     console.log('Initial App State', this.appState.state);
+    this.http.get('/assets/tree.json')
+      .subscribe(res => {
+        this.files = res.json().data;
+      });
   }
 
 }
