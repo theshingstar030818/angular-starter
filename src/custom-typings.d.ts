@@ -1,9 +1,26 @@
 /*
+ * Type Defintions
+ * Remove these imports with TypeScript 2.0
+ * If your type defintion is missing open an issue https://github.com/DefinitelyTyped/DefinitelyTyped/issues
+ * And create your own read below
+ */
+import "@types/angular-protractor"
+import "@types/core-js"
+import "@types/hammerjs"
+import "@types/jasmine"
+import "@types/node"
+import "@types/selenium-webdriver"
+import "@types/source-map"
+import "@types/uglify-js"
+import "@types/webpack"
+
+/*
  * Custom Type Definitions
  * When including 3rd party modules you also need to include the type definition for the module
- * if they don't provide one within the module. You can try to install it with typings
+ * if they don't provide one within the module. You can try to install it with @types
 
-typings install dt~node --save --global
+npm install @types/node // where node is your module name
+npm install @types/lodash
 
  * If you can't find the type definition in the registry we can make an ambient/global definition in
  * this file for now. For example
@@ -36,8 +53,8 @@ declare var $: any;
 
 import * as _ from 'lodash'
 
- * You can include your type definitions in this file until you create one for the typings registry
- * see https://github.com/typings/registry
+ * If you can not find your type definition in @types then create an issue
+ * https://github.com/DefinitelyTyped/DefinitelyTyped/issues
  *
  */
 
